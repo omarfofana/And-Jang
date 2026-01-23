@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: And-Jang
+  datasource:
+    username: root
+    #password: toto
+    url: jdbc:mysql://localhost:3306/and_jang
+
+  jpa:
+    hibernate:
+      #ddl-auto: create permet de supprimer toutes les tables et de les recréer
+      ddl-auto: none
+    show-sql: true
