@@ -39,4 +39,10 @@ public class Personne {
     @Column(length = 150, nullable = false, unique = true)
     private String email;
 
+    @PrePersist
+    @PreUpdate
+    public void onCreate(){
+        this.dateEnregistrement = LocalDateTime.now();
+    }
+
 }
