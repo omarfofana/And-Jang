@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.EntityResponse;
 import sn.edu.ugb.ipsl.ing2.p11.And_Jang.entities.Personne;
+import sn.edu.ugb.ipsl.ing2.p11.And_Jang.service.IpslApiError;
 import sn.edu.ugb.ipsl.ing2.p11.And_Jang.service.PersonneService;
 
 import java.util.List;
@@ -50,8 +51,13 @@ public class PersonneController {
     }
 
     @PostMapping
-    public Personne createPersonne(@RequestBody Personne personne) {
-        return personneService.save(personne);
+    public ResponseEntity createPersonne(@RequestBody Personne personne) {
+        try {
+            Personne p = personneService.create(personne);
+            return ResponseEntity.status(201).body(p);
+        } catch (IpslApiError e) {
+            return e.getResponse();
+        }
     }
 
     @DeleteMapping("/{id}")

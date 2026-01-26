@@ -24,9 +24,16 @@ public class PersonneService {
         return personneRepository.findById(id);
     }
 
-    public Personne save(Personne personne) {
+    public Personne create(Personne personne) throws IpslApiError {
+        if (personne.getPrenom() == null || personne.getPrenom().isBlank()) {
+            throw new IpslApiError(451,"le nom est obligatoire");
+        }
+        if (personne.getNom() == null || personne.getNom().isBlank()) {
+            throw new IpslApiError(452,"le nom est obligatoire");
+        }
         return personneRepository.save(personne);
     }
+
     public void delete(Personne personne) {
         personneRepository.delete(personne);
     }
