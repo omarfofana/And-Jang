@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,10 @@ public class PersonneController {
             }
     )
     @GetMapping
-    public List<Personne> findAll() {
+    public List<Personne> findAll(@RequestParam(name = "sarch", required = false) String searchTxt) {
+        if(searchTxt != null && !searchTxt.isEmpty()) {
+            return personneService.search(searchTxt);
+        }
         return personneService.findAll();
     }
 

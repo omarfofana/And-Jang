@@ -28,8 +28,16 @@ public class PersonneService {
         if (personne.getPrenom() == null || personne.getPrenom().isBlank()) {
             throw new IpslApiError(451,"le nom est obligatoire");
         }
+        if (personne.getEmail() == null || personne.getEmail().isBlank()) {
+            throw new IpslApiError(450,"email est obligatoire");
+        }
         if (personne.getNom() == null || personne.getNom().isBlank()) {
             throw new IpslApiError(452,"le nom est obligatoire");
+        }
+        String email = personne.getEmail().trim();
+        Optional<Personne> personneOptional = personneRepository.findByEmail(personne.getEmail());
+        if (personneOptional.isPresent()) {
+            throw new IpslApiError(409,"L'adresse email '"+personne.getEmail()+"' existe deja");
         }
         return personneRepository.save(personne);
     }
@@ -44,5 +52,10 @@ public class PersonneService {
         return personneRepository.save(personne);
     }
 
-
+    private Optional<Personne> findByEmail(String email) {
+        return personneRepository.findByEmail(email);
+    }
+    public List<Personne> search(String txt){
+        return personneRepository.search(txt);
+    }
 }
