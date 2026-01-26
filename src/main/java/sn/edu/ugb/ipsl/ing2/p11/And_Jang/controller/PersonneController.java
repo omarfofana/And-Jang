@@ -1,5 +1,7 @@
 package sn.edu.ugb.ipsl.ing2.p11.And_Jang.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,18 @@ public class PersonneController {
         this.personneService = personneService;
     }
 
+
     //   http://localhost:8080/api/v1/personnes
+    @Operation(
+            summary = "liste des personnes",
+            description = "Retourne la liste de toutes les personnes",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "La liste des personnes est retournée"
+                    )
+            }
+    )
     @GetMapping
     public List<Personne> findAll() {
         return personneService.findAll();

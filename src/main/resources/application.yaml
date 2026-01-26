@@ -8,6 +8,6 @@ spring:
 
   jpa:
     hibernate:
-      #ddl-auto: create permet de supprimer toutes les tables et de les recréer
-      ddl-auto: none
+      #ddl-auto: create #### permet de supprimer toutes les tables et de les recréer
+      ddl-auto: create
     show-sql: true
