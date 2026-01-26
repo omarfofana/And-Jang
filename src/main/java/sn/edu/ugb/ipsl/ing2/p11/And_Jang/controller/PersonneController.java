@@ -1,7 +1,10 @@
 package sn.edu.ugb.ipsl.ing2.p11.And_Jang.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,8 +53,62 @@ public class PersonneController {
         //if(personnedb.isEmpty()) {return null;}
     }
 
+    @Operation(
+            summary = "Enregistre nouvelle personne",
+            description = "Permet d'enregistrer une nouvelle personne,Id ne doit pas etre renseigner",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "La personne est enregsitrée avec succés",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(
+                                                    value = "{\n" +
+                                                            "  \"id\": 3,\n" +
+                                                            "  \"nom\": \"FALL\",\n" +
+                                                            "  \"prenom\": \"Fatou\",\n" +
+                                                            "  \"adresse\": \"Guediawaye\",\n" +
+                                                            "  \"telephone\": \"77777777\",\n" +
+                                                            "  \"dateNaissance\": \"2009-01-26\",\n" +
+                                                            "  \"dateEnregistrement\": \"2026-01-26T16:35:38.2911724\",\n" +
+                                                            "  \"email\": \"fall@gmail.com\"\n" +
+                                                            "}"
+                                            )
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "451",
+                            description = "Le prenom n'a pas ete renseigne"
+                    ),
+                    @ApiResponse(
+                            responseCode = "452",
+                            description = "Le nom n'a pas ete renseigne"
+                    )
+            }
+    )
     @PostMapping
-    public ResponseEntity createPersonne(@RequestBody Personne personne) {
+    public ResponseEntity createPersonne(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "La personne à créer",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = {
+                                    @ExampleObject(
+                                            value = "{\n" +
+                                                    "  \"nom\": \"FALL\",\n" +
+                                                    "  \"prenom\": \"Fatou\",\n" +
+                                                    "  \"adresse\": \"Guediawaye\",\n" +
+                                                    "  \"telephone\": \"77777777\",\n" +
+                                                    "  \"dateNaissance\": \"2009-01-26\",\n" +
+                                                    "  \"email\": \"fall@gmail.com\"\n" +
+                                                    "}\n"
+                                    )
+                            }
+                    )
+            )
+            @RequestBody Personne personne) {
         try {
             Personne p = personneService.create(personne);
             return ResponseEntity.status(201).body(p);
