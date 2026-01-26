@@ -1,6 +1,9 @@
 package sn.edu.ugb.ipsl.ing2.p11.And_Jang.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.EntityResponse;
 import sn.edu.ugb.ipsl.ing2.p11.And_Jang.entities.Personne;
 import sn.edu.ugb.ipsl.ing2.p11.And_Jang.service.PersonneService;
 
@@ -21,13 +24,15 @@ public class PersonneController {
         return personneService.findAll();
     }
 
-    @GetMapping("/test/{id}")
-    public Personne findById(@PathVariable("id") Integer idPersonne) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Personne> findById(@PathVariable("id") Integer idPersonne) {
         Optional<Personne> personnedb = personneService.findById(idPersonne);
         if (personnedb.isPresent()) {
-            return personnedb.get();
+            Personne personne = personnedb.get();
+            return ResponseEntity.ok().body(personne);
         }
-        return null;
+        return ResponseEntity.status(414).build();
+        //return ResponseEntity.notFound().build();
         //if(personnedb.isEmpty()) {return null;}
     }
 
