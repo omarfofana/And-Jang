@@ -1,0 +1,11 @@
+And_Jang:
+  admin:
+    name: Equipe Dev
+    email: dev@ugb.edu.sn
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    url: jdbc:mysql://localhost/and_jang_test
