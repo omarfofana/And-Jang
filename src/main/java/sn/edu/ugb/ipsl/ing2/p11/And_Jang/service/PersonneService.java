@@ -72,7 +72,7 @@ public class PersonneService {
             p1.setPrenom("Abdoulaye");
             p1.setDateEnregistrement(LocalDateTime.now());
             p1.setDateNaissance(LocalDate.of(2006  , 6, 7));
-            p1.setEmail("fofana-cheikh-oumar@ugb.edu.sn");
+            p1.setEmail("boly@ugb.edu.sn");
             personneRepository.save(p1);
 
             Personne p2 = Personne.builder()
