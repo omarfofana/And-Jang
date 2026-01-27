@@ -1,10 +1,15 @@
+And_Jang:
+  admin:
+    name: Fatou Dior DIOKHANE
+    email: diokhane.fatou-dior@ugb.edu.sn
 spring:
   application:
     name: And-Jang
   datasource:
-    username: root
-    #password: toto
-    url: jdbc:mysql://localhost:3306/and_jang
+    username: ${AND_JANG_DB_USER}
+    password: ${AND_JANG_DB_PWD}
+    url: ${AND_JANG_DB_URL}
+
 
   jpa:
     hibernate:
