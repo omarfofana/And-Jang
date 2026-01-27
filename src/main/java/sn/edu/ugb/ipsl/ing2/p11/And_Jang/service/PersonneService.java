@@ -68,6 +68,7 @@ public class PersonneService {
             System.out.println("PersonneInit...");
             Personne p1 = new Personne();
             p1.setNom("Boly");
+            p1.setTelephone("1234567890");
             p1.setPrenom("Abdoulaye");
             p1.setDateEnregistrement(LocalDateTime.now());
             p1.setDateNaissance(LocalDate.of(2006  , 6, 7));
