@@ -1,6 +1,7 @@
 package sn.edu.ugb.ipsl.ing2.p11.And_Jang.init;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import sn.edu.ugb.ipsl.ing2.p11.And_Jang.entities.Personne;
 import sn.edu.ugb.ipsl.ing2.p11.And_Jang.repositories.PersonneRepository;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
+@Order(2)
 public class PersonneInit implements CommandLineRunner {
 
     private final PersonneRepository personneRepository;
