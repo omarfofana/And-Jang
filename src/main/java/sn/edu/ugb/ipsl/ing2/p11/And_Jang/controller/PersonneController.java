@@ -38,7 +38,7 @@ public class PersonneController {
             }
     )
     @GetMapping
-    public List<Personne> findAll(@RequestParam(name = "sarch", required = false) String searchTxt) {
+    public List<Personne> findAll(@RequestParam(name = "search", required = false) String searchTxt) {
         if(searchTxt != null && !searchTxt.isEmpty()) {
             return personneService.search(searchTxt);
         }
